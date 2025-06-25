@@ -1,19 +1,9 @@
 @PACKAGE_INIT@
-
-# Find dependencies that users of this library need
 include(CMakeFindDependencyMacro)
-
 find_dependency(Threads REQUIRED)
-
-# Users need to provide these dependencies themselves
-# (via their own FetchContent, vcpkg, or system packages)
-find_dependency(fmt QUIET)
-find_dependency(glm QUIET)
-find_dependency(simplexnoise QUIET)
-
-# Maya is required for this library
+find_dependency(fmt REQUIRED)
+find_dependency(glm REQUIRED)
+find_dependency(simplexnoise REQUIRED)
 find_dependency(Maya 2025 REQUIRED)
-
 include("${CMAKE_CURRENT_LIST_DIR}/jfwTargets.cmake")
-
 check_required_components(jfw)

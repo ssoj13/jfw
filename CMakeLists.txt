@@ -83,11 +83,11 @@ target_include_directories(jfw PUBLIC
 target_include_directories(jfw PRIVATE ${MAYA_INCLUDE_DIR})
 
 # Link libraries
-target_link_libraries(jfw PUBLIC
+target_link_libraries(jfw PRIVATE
     simplexnoise::simplexnoise
-	glm::glm
     Threads::Threads
     fmt::fmt
+	glm::glm
 )
 
 # Link Maya libraries
