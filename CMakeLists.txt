@@ -47,6 +47,9 @@ message(STATUS "Maya include dir: ${MAYA_INCLUDE_DIR}")
 message(STATUS "Maya library dir: ${MAYA_LIBRARY_DIR}")
 message(STATUS "Maya libs: ${MAYA_LIBRARIES}")
 
+# Find required packages
+find_package(Threads REQUIRED)
+
 
 # Fetch simplexnoise
 FetchContent_Declare(simplexnoise GIT_REPOSITORY https://github.com/ssoj13/simplexnoise.git GIT_TAG main)
@@ -55,14 +58,11 @@ FetchContent_MakeAvailable(simplexnoise)
 FetchContent_Declare(fmt GIT_REPOSITORY git@github.com:fmtlib/fmt.git GIT_TAG master)
 FetchContent_MakeAvailable(fmt)
 
-# Find required packages
-find_package(Threads REQUIRED)
+FetchContent_Declare(glm GIT_REPOSITORY https://github.com/g-truc/glm.git GIT_TAG master)
+FetchContent_MakeAvailable(glm)
 
-# vcpkg packages need CONFIG mode
-find_package(fmt CONFIG REQUIRED)
+
 message(STATUS "fmt found: ${fmt_VERSION}")
-
-find_package(glm REQUIRED)
 message(STATUS "glm found: ${glm_VERSION}")
 
 
@@ -85,7 +85,7 @@ target_include_directories(jfw PRIVATE ${MAYA_INCLUDE_DIR})
 # Link libraries
 target_link_libraries(jfw PUBLIC
     simplexnoise::simplexnoise
-	glm::glm-header-only
+	glm::glm
     Threads::Threads
     fmt::fmt
 )
